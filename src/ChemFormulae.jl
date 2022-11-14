@@ -1,5 +1,7 @@
 module ChemFormulae
 
-# Write your package code here.
+using ChemElementsBB, ChemEquations 
+
+include("ChemFormula_def.jl")
 
 end
