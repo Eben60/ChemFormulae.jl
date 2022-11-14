@@ -1,0 +1,13 @@
+name = "ChemFormulae"
+uuid = "f0fcd865-1d8b-4f50-b44a-8534b8fd0eac"
+authors = ["<8xe8n-cm@online.de>"]
+version = "0.0.1"
+
+[compat]
+julia = "1.6"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
