@@ -18,8 +18,8 @@ end
 el_in_comp_substr(e::ElemInCompound) = "$(e.elem.symbol)$(n2s(e.n))"
 
 function ChemFormula(f::AbstractString)
-    f = de_subscr(f)
-    c = Compound(f)
+    f0 = de_subscr(f)
+    c = Compound(f0)
     atoms = ElemInCompound[]
     for a in c.tuples
         sym = Symbol(a[1])
@@ -36,3 +36,5 @@ function ChemFormula(f::AbstractString)
     brutto_string = join(els, "")
     return ChemFormula(f, brutto_string, atoms, weight)   
 end
+
+# TODO indexing, iterations
