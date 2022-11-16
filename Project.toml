@@ -1,14 +1,14 @@
 name = "ChemFormulae"
 uuid = "f0fcd865-1d8b-4f50-b44a-8534b8fd0eac"
 authors = ["Eben60"]
-version = "0.0.1"
+version = "0.0.2"
 
 [deps]
 ChemElementsBB = "0ccca54f-f716-42eb-a58d-e6954ac683ff"
 ChemEquations = "75e6b969-eb85-49eb-b654-b2cb515e226f"
 
 [compat]
-julia = "1.8"
+julia = "1.7"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

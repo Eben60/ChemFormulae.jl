@@ -1,8 +1,8 @@
 
-mutable struct ElemInCompound
-    const elem::ChemElemBB
-    const n::Float64
-    const weight::Float64
+struct ElemInCompound
+    elem::ChemElemBB
+    n::Float64
+    weight::Float64
     mass_share::Float64
 end
 
@@ -11,8 +11,9 @@ ElemInCompound(elem::ChemElemBB, n) = ElemInCompound(elem::ChemElemBB, n, n*elem
 struct ChemFormula
     cc_string::String
     brutto_string::String
-    atoms::Vector{ElemInCompound}
     weight::Float64
+    atoms::Vector{ElemInCompound}
+    bysymbol::Dict{Symbol, Int}
 end
 
 el_in_comp_substr(e::ElemInCompound) = "$(e.elem.symbol)$(n2s(e.n))"
@@ -20,21 +21,21 @@ el_in_comp_substr(e::ElemInCompound) = "$(e.elem.symbol)$(n2s(e.n))"
 function ChemFormula(f::AbstractString)
     f0 = de_subscr(f)
     c = Compound(f0)
-    atoms = ElemInCompound[]
-    for a in c.tuples
-        sym = Symbol(a[1])
-        n = a[2]
-        eic = ElemInCompound(chem_els[sym], n)
-        push!(atoms, eic)
-    end
-    weight = sum(x -> x.elem, atoms)
-    for a in atoms
-        a.mass_share = a.weight / weight
-    end
+
+    ats = [(;elem=chem_els[Symbol(a[1])], n = a[2]) for a in c.tuples]
+    weight = sum(x -> x.elem*x.n, ats)
+    atoms = [ElemInCompound(x.elem, x.n, x.elem.weight*x.n, x.elem.weight*x.n/weight) for x in ats]
+
     sort!(atoms; by = x -> x.elem.number)
     els = [el_in_comp_substr(x) for x in atoms]
     brutto_string = join(els, "")
-    return ChemFormula(f, brutto_string, atoms, weight)   
+
+    bysymbol = Dict{Symbol, Int}(atoms[i].elem.symbol=>i for i in eachindex(atoms))
+    return ChemFormula(f, brutto_string, weight, atoms, bysymbol)   
 end
+
+Base.getindex(e::ChemFormula, i::Integer) = e.atoms[i]
+Base.getindex(e::ChemFormula, i::Symbol) = e.atoms[e.bysymbol[i]]
+
 
 # TODO indexing, iterations
