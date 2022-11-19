@@ -1,10 +1,11 @@
 using ChemFormulae, ChemElementsBB
-using ChemFormulae: ElemInCompound
+using ChemFormulae: ElemInCompound, @cc_str, Compound, elements, hascharge
 
 using Test
 
-@testset "ChemFormulae.jl" begin
+include("compound_test.jl")
 
+@testset "ChemFormulae" begin
 
 abellait = ChemFormula("NaPb₂(CO3)₂(OH)");
 @test abellait.brutto_string == "HC2O7NaPb2"
@@ -45,6 +46,10 @@ h2o_4 = ChemFormula(Dict(:H=>2, :O=>1), "H2O")
 h2o_5 = ChemFormula((;O=1, H=2))
 h2o_6 = cf"H2O"
 
+@test ChemFormula("CuSO4*5H2O") == ChemFormula("CuSO9H10")
+@test ChemFormula("MgOH * OH * CO") == ChemFormula("MgO3H2C")
+@test ChemFormula("Mg OH * 5 (OH)2") == ChemFormula("MgO11H11")
+
 @test h2o_1.cc_string == h2o_2.cc_string
 
 @test h2o_1.brutto_string == h2o_2.brutto_string
@@ -56,10 +61,12 @@ h2o_6 = cf"H2O"
 @test isequal(h2o_1, h2o_2)
 @test h2o_1 == h2o_2 == h2o_3 == h2o_4 == h2o_5 == h2o_6
 
-ybco = ChemFormula([:Y=>1, :Ba=>2, :Cu=>3, :O=>6.94])
-@test ybco.brutto_string == "O6.94Cu3YBa2"
-@test ybco.atoms_total isa Float64
-@test ybco.atoms_total ≈ 12.94
+ybco_1 = ChemFormula([:Y=>1, :Ba=>2, :Cu=>3, :O=>6.94])
+ybco_2 = cf"YBa2Cu3O6.94"
+@test ybco_1.brutto_string == "O6.94Cu3YBa2"
+@test ybco_1.atoms_total isa Float64
+@test ybco_1.atoms_total ≈ 12.94
+@test ybco_1 == ybco_2
 
 end
 ;

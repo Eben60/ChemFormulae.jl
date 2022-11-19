@@ -22,7 +22,7 @@ el_in_comp_substr(e::ElemInCompound) = "$(e.elem.symbol)$(n2s(e.n))"
 function parse_chemformula(f::AbstractString)
     f0 = de_subscr(f)
     c = Compound(f0).tuples
-    return [Symbol(a[1]) => a[2] for a in c]
+    return Vector{Pair{Symbol, Union{Float64, Int}}}([Symbol(a[1]) => a[2] for a in c])
 end
 
 
