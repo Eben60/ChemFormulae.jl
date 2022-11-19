@@ -46,3 +46,5 @@ end
 
 ChemFormula(d::Dict, f = missing) = ChemFormula(collect(d), f)
 ChemFormula(p::NamedTuple, f = missing) = ChemFormula(collect(pairs(p)), f)
+
+macro cf_str(str) ChemFormula(str) end

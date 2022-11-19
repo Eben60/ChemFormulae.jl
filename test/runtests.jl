@@ -43,6 +43,7 @@ h2o_2 = ChemFormula([:H=>2, :O=>1], "H2O")
 h2o_3 = ChemFormula([1=>2, 8=>1], "H2O")
 h2o_4 = ChemFormula(Dict(:H=>2, :O=>1), "H2O")
 h2o_5 = ChemFormula((;O=1, H=2))
+h2o_6 = cf"H2O"
 
 @test h2o_1.cc_string == h2o_2.cc_string
 
@@ -53,11 +54,7 @@ h2o_5 = ChemFormula((;O=1, H=2))
 @test h2o_1.bysymbol == h2o_2.bysymbol
 
 @test isequal(h2o_1, h2o_2)
-@test isequal(h2o_1, h2o_3)
-@test isequal(h2o_1, h2o_4)
-@test isequal(h2o_1, h2o_5)
-
-@test_broken h2o_1 == h2o_2
+@test h2o_1 == h2o_2 == h2o_3 == h2o_4 == h2o_5 == h2o_6
 
 ybco = ChemFormula([:Y=>1, :Ba=>2, :Cu=>3, :O=>6.94])
 @test ybco.brutto_string == "O6.94Cu3YBa2"

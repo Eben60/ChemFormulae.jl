@@ -16,8 +16,9 @@ Base.eltype(e::ChemFormula) = ElemInCompound
 Base.length(e::ChemFormula) = length(e.atoms)
 Base.iterate(e::ChemFormula, state...) = iterate(e.atoms, state...)
 
-Base.isequal(e1::ChemFormula, e2::ChemFormula) = e1.atoms == e2.atoms
 Base.hash(e::ChemFormula, h::UInt) = hash(e.brutto_string, h)
+Base.isequal(e1::ChemFormula, e2::ChemFormula) = e1.atoms == e2.atoms
+Base.:(==)(e1::ChemFormula, e2::ChemFormula) = isequal(e1, e2)
 
 # to be used for sorting only
 Base.isless(e1::ChemFormula, e2::ChemFormula) = e1.brutto_string < e2.brutto_string
