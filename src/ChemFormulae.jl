@@ -1,7 +1,8 @@
 module ChemFormulae
 
-using ChemElementsBB, ChemEquations 
+using ChemElementsBB # , ChemEquations 
 
+include("compound.jl")
 include("string_conversions.jl")
 include("ChemFormula_def.jl")
 include("overloads.jl")

@@ -1,7 +1,7 @@
 name = "ChemFormulae"
 uuid = "f0fcd865-1d8b-4f50-b44a-8534b8fd0eac"
-authors = ["Eben60"]
-version = "0.0.2"
+authors = ["Eben60 & zlatanvasovic <zlatanvasovic@gmail.com>"]
+version = "0.0.3"
 
 [deps]
 ChemElementsBB = "0ccca54f-f716-42eb-a58d-e6954ac683ff"
