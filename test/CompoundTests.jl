@@ -1,3 +1,8 @@
+module CompoundTests
+
+using ChemFormulae: @cc_str, Compound, elements, hascharge
+using Test
+
 water = cc"H2O"
 H_ion = cc"H{+1}"
 O_ion = cc"O{-2}"
@@ -55,3 +60,5 @@ end
     @test hascharge(H_ion) == true
     @test hascharge(O_ion) == true
 end
+
+end # module
