@@ -5,8 +5,6 @@ version = "0.0.3"
 
 [deps]
 ChemElementsBB = "0ccca54f-f716-42eb-a58d-e6954ac683ff"
-ChemEquations = "75e6b969-eb85-49eb-b654-b2cb515e226f"
-Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 
 [compat]
 julia = "1.7"
