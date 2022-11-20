@@ -67,6 +67,14 @@ ybco_2 = cf"YBa2Cu3O6.94"
 @test ybco_1.atoms_total ≈ 12.94
 @test ybco_1 == ybco_2
 
+@test_throws KeyError ChemFormula("Ye2Mo")
+@test_throws KeyError ChemFormula("Y-2Mo")
+
+# @test_throws BoundsError cf"(C2H4.94)2O"
+# @test_throws BoundsError cf"((CF3)3C)2CH2)"
+@test_broken cf"(C2H2)1.95O" == cf"C3.9H3.9O"
+
+
 end # testset
 end # module
 ;
