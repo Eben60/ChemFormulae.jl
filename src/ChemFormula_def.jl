@@ -23,10 +23,17 @@ function parse_chemformula(f::AbstractString)
     return Vector{Pair{Symbol, Union{Float64, Int}}}([Symbol(a[1]) => a[2] for a in c])
 end
 
-function ChemFormula(f::AbstractString)
+function ChemFormula(f::AbstractString; groups = nothing)
+    if  ! isnothing(groups) 
+        groups = collect(pairs(groups))
+        groups = [string(p.first) => "($(p.second))" for p in groups ]
+        f1 = add1(f)
+        f = replace(f1, groups...)
+    end
     ps = parse_chemformula(f)
     return ChemFormula(ps, f)
 end
+
 
 function ChemFormula(ps::Vector{Pair{S, I}}, f = missing) where I <: Real where S <: Union{Symbol, Integer}
     ats = [(;elem=chem_els[a[1]], n = a[2]) for a in ps]

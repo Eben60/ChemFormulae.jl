@@ -61,6 +61,9 @@ function Compound(str::AbstractString)
     Compound(_elementtuples(str), _charge(str))
 end
 
+"Add 1 to elements and parens without a coefficient"
+add1(str) = replace(str,  r"(?<x>\p{L}|\p{S}|\))(?=(\p{Lu}|\(|\)|\*|$))" => s"\g<x>1")
+
 "Extracts element tuples from compound's string."
 function _elementtuples(str::AbstractString)
     str = replace(str, CHARGEREGEX => "")
@@ -71,7 +74,8 @@ function _elementtuples(str::AbstractString)
     tuples = ElementTuple[]
 
     # Add 1 to elements and parens without a coefficient
-    str = replace(str,  r"(?<x>\p{L}|\p{S}|\))(?=(\p{Lu}|\(|\)|\*|$))" => s"\g<x>1")
+    str = add1(str)
+#   str = replace(str,  r"(?<x>\p{L}|\p{S}|\))(?=(\p{Lu}|\(|\)|\*|$))" => s"\g<x>1")
 
     # Expand parens
     for substr ∈ eachmatch(r"\(((\p{L}|\d)+)\)(\d+)", str)
