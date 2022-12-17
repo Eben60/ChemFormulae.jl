@@ -5,6 +5,10 @@ version = "0.0.3"
 
 [deps]
 ChemElementsBB = "0ccca54f-f716-42eb-a58d-e6954ac683ff"
+<<<<<<< HEAD
+=======
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
+>>>>>>> dev
 
 [compat]
 julia = "1.7"
