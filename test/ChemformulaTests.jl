@@ -1,6 +1,6 @@
 module ChemFormulaTests
 
-using ChemFormulae, ChemElementsBB
+using ChemFormulae
 using ChemFormulae: ElemInCompound
 using Test
 

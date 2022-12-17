@@ -1,6 +1,6 @@
 
 struct ElemInCompound
-    elem::ChemElemBB
+    elem::ChemElem
     n::Float64
     weight::Float64
     mass_share::Float64
@@ -34,17 +34,23 @@ function ChemFormula(f::AbstractString; groups = nothing)
     return ChemFormula(ps, f)
 end
 
+weight_uless(elem) = elem.atomic_weight |> ustrip
+
+function string_or_missing(s)
+    ismissing(s) && return s
+    return String(s)
+end
 
 function ChemFormula(ps::Vector{Pair{S, I}}, f = missing) where I <: Real where S <: Union{Symbol, Integer}
-    ats = [(;elem=chem_els[a[1]], n = a[2]) for a in ps]
-    weight = sum(x -> x.elem*x.n, ats)
-    atoms = [ElemInCompound(x.elem, x.n, x.elem.weight*x.n, x.elem.weight*x.n/weight) 
+    ats = [(;elem=chem_elements[a[1]], n = a[2]) for a in ps]
+    weight = sum(x -> weight_uless(x.elem)*x.n, ats)
+    atoms = [ElemInCompound(x.elem, x.n, weight_uless(x.elem)*x.n, weight_uless(x.elem)*x.n/weight) 
                             for x in ats]
-    sort!(atoms; by = x -> x.elem.number)
+    sort!(atoms; by = x -> x.elem.atomic_number)
     atoms_total = sum(x -> x.n, atoms)
     brutto_string = join([el_in_comp_substr(x) for x in atoms], "")
     bysymbol = Dict{Symbol, Int}(atoms[i].elem.symbol=>i for i in eachindex(atoms))
-    return ChemFormula(f, brutto_string, atoms_total, weight, atoms, bysymbol)   
+    return ChemFormula(string_or_missing(f), brutto_string, atoms_total, weight, atoms, bysymbol)   
 end
 
 ChemFormula(p::Union{Dict, NamedTuple}, f = missing) = ChemFormula(collect(pairs(p)), f)

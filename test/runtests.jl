@@ -1,2 +1,3 @@
 include("CompoundTests.jl")
-include("ChemformulaTests.jl")
+include("ChemFormulaTests.jl")
+include("ChemGroupsTests.jl")

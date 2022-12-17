@@ -1,6 +1,7 @@
 module ChemFormulae
 
-using ChemElementsBB # , ChemEquations 
+# using ChemElementsBB # , ChemEquations
+using Mendeleev, Unitful
 
 include("compound.jl")
 include("string_conversions.jl")

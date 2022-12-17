@@ -1,19 +1,17 @@
 name = "ChemFormulae"
 uuid = "f0fcd865-1d8b-4f50-b44a-8534b8fd0eac"
-authors = ["Eben60 & zlatanvasovic <zlatanvasovic@gmail.com>"]
+authors = ["Eben60"]
 version = "0.0.3"
 
 [deps]
-ChemElementsBB = "0ccca54f-f716-42eb-a58d-e6954ac683ff"
-<<<<<<< HEAD
-=======
-Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
->>>>>>> dev
+Mendeleev = "c116f080-063d-490a-9873-2b5b2cce4c34"
+Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [compat]
 julia = "1.7"
 
 [extras]
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
